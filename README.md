@@ -2,6 +2,8 @@
 
 This repo will contain code snippets and files for CCGC5504
 
+<br>
+
 # Commands
 
 ## Git
@@ -15,6 +17,11 @@ git config --global user.email "YOUR_EMAIL"
 ```
 git init
 git remote add origin GITHUB_REPO_URL
+```
+
+### Using existing repo
+```
+git clone GITHUB_REPO_URL
 ```
 
 ### When making changes (Most Used) 
@@ -31,7 +38,6 @@ git branch NEW_BRANCH_NAME
 git checkout NEW_BRANCH_NAME
 git push origin NEW_BRANCH_NAME
 ```
-
 
 ### When feature done and ready to merge to main branch
 ```
