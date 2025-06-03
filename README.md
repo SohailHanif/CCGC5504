@@ -50,5 +50,7 @@ git push origin master
 ## Docker
 
 ### Installation
+```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh ./get-docker.sh
+```
