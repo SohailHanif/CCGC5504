@@ -54,3 +54,20 @@ git push origin master
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh ./get-docker.sh
 ```
+
+### Run Container
+```
+sudo docker run hello-world
+```
+
+
+### Get Compose Example
+```
+git clone https://github.com/iimran-muhammad/multi-container-app
+```
+
+### Compose
+```
+sudo docker compose up
+sudo docker compose down
+```
