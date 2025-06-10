@@ -77,6 +77,15 @@ sudo docker compose down
 ### Installation
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+sudo usermod -aG docker $USER && newgrp docker
 
 ## Start
 minikube start
+
+## Get Components
+minikube kubectl -- get pods -A
+minikube kubectl -- get services -A
+minikube kubectl -- get deployments -A
+
+## Deploy App
+minikube kubectl -- apply -f nginx.yml 
