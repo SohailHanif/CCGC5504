@@ -71,3 +71,12 @@ git clone https://github.com/iimran-muhammad/multi-container-app
 sudo docker compose up
 sudo docker compose down
 ```
+
+
+## Kubernetes
+### Installation
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
+## Start
+minikube start
