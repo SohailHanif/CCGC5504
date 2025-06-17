@@ -77,11 +77,6 @@ sudo docker compose down
 ### Installation
 curl -sfL https://get.k3s.io | sh - 
 
-## Start/Delete Cluster
-sudo apt update ; sudo apt install -y conntrack cri-tools
-minikube start --driver=none
-minikube delete
-
 ## Get Components
 sudo k3s kubectl get node
 sudo k3s kubectl get pods -a
