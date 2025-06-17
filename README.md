@@ -75,17 +75,20 @@ sudo docker compose down
 
 ## Kubernetes
 ### Installation
-curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
-sudo usermod -aG docker $USER && newgrp docker
+curl -sfL https://get.k3s.io | sh - 
 
-## Start
-minikube start
+## Start/Delete Cluster
+sudo apt update ; sudo apt install -y conntrack cri-tools
+minikube start --driver=none
+minikube delete
 
 ## Get Components
-minikube kubectl -- get pods -A
-minikube kubectl -- get services -A
-minikube kubectl -- get deployments -A
+sudo k3s kubectl get node
+sudo k3s kubectl get pods -a
+sudo k3s kubectl get services -A
+sudo k3s kubectl get deployments -A
 
 ## Deploy App
-minikube kubectl -- apply -f nginx.yml 
+sudo k3s kubectl apply -f nginx.yml 
+sudo k3s kubectl get pods -n default
+sudo k3s kubectl get services -n default
