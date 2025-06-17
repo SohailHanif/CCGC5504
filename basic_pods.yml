@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: basic_pods
+spec:
+  containers:
+    - name: container1
+      image: nginx
+    - name: container2
+      image: alpine

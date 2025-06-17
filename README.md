@@ -87,3 +87,6 @@ sudo k3s kubectl get deployments -A
 sudo k3s kubectl apply -f nginx.yml 
 sudo k3s kubectl get pods -n default
 sudo k3s kubectl get services -n default
+
+## Destroy/ Redeploy App
+sudo k3s kubectl delete -f nginx.yml 
