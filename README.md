@@ -79,7 +79,7 @@ curl -sfL https://get.k3s.io | sh -
 
 ## Get Components
 sudo k3s kubectl get node
-sudo k3s kubectl get pods -a
+sudo k3s kubectl get pods -A
 sudo k3s kubectl get services -A
 sudo k3s kubectl get deployments -A
 
