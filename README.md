@@ -90,3 +90,10 @@ sudo k3s kubectl get services -n default
 
 ## Destroy/ Redeploy App
 sudo k3s kubectl delete -f nginx.yml 
+
+## Debugging Failed resource
+### Any resource
+sudo k3s kubectl -n default describe pod basic-pods
+
+### Pods only
+sudo k3s kubectl -n default logs basic-pods
