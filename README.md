@@ -82,6 +82,7 @@ sudo k3s kubectl get node
 sudo k3s kubectl get pods -A
 sudo k3s kubectl get services -A
 sudo k3s kubectl get deployments -A
+sudo k3s kubectl get namespace --show-labels
 
 ## Deploy App
 sudo k3s kubectl apply -f nginx.yml 
