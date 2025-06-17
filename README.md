@@ -94,6 +94,7 @@ sudo k3s kubectl delete -f nginx.yml
 ## Debugging Failed resource
 ### Any resource
 sudo k3s kubectl -n default describe pod basic-pods
+sudo k3s kubectl -n default describe pod basic-pods > debug.txt
 
 ### Pods only
 sudo k3s kubectl -n default logs basic-pods
