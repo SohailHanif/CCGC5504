@@ -147,6 +147,27 @@ helm create website
 5 directories, 10 files
 ```
 
+### Getting Kubernetes Context
+
+```
+mkdir $HOME/.kube/
+sudo cat /etc/rancher/k3s/k3s.yaml > $HOME/.kube/config
+```
+
+### Installing from ArtifactHub
+https://artifacthub.io/packages/helm/bitnami/wordpress
+
+```
+Direct Install
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-wordpress bitnami/wordpress -
+```
+
+```
+Download locally
+helm pull oci://registry-1.docker.io/bitnamicharts/wordpress --version 25.0.0
+```
 
 
 ### Aliases
