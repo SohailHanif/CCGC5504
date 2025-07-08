@@ -76,36 +76,81 @@ sudo docker compose down
 ## Kubernetes
 
 ### Installation
+```
 curl -sfL https://get.k3s.io | sh - 
+```
 
 ### Get Components
+```
 sudo k3s kubectl get node
 sudo k3s kubectl get pods -A
 sudo k3s kubectl get services -A
 sudo k3s kubectl get deployments -A
 sudo k3s kubectl get namespace --show-labels
+```
 
 ### Deploy App
+```
 sudo k3s kubectl apply -f nginx.yml 
 sudo k3s kubectl get pods -n default
 sudo k3s kubectl get services -n default
+```
 
 ### Destroy/ Redeploy App
+```
 sudo k3s kubectl delete -f nginx.yml 
+```
 
 ### Debugging Failed resource
 #### Any resource
+```
 sudo k3s kubectl -n default describe pod basic-pods
 sudo k3s kubectl -n default describe pod basic-pods > debug.txt
+```
 
 #### Pods only
+```
 sudo k3s kubectl -n default logs basic-pods
+```
 
-### Helm
+## Helm
+
+### Installation
+```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
+```
+
+### Creating Charts/Applications
+```
+helm create website
+```
+
+```
+.
+└── website
+    ├── Chart.yaml
+    ├── charts
+    ├── templates
+    │   ├── NOTES.txt
+    │   ├── _helpers.tpl
+    │   ├── deployment.yaml
+    │   ├── hpa.yaml
+    │   ├── ingress.yaml
+    │   ├── service.yaml
+    │   ├── serviceaccount.yaml
+    │   └── tests
+    │       └── test-connection.yaml
+    └── values.yaml
+
+5 directories, 10 files
+```
+
+
 
 ### Aliases
+```
 echo "alias k='sudo k3s kubectl'" >> ~/.bashrc  && source  ~/.bashrc
 echo "alias helm='sudo helm'" >> ~/.bashrc  && source  ~/.bashrc
+```
