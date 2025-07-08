@@ -99,3 +99,6 @@ sudo k3s kubectl -n default describe pod basic-pods > debug.txt
 
 ### Pods only
 sudo k3s kubectl -n default logs basic-pods
+
+### Alias
+echo "alias k='sudo k3s kubectl'" >> ~/.bashrc  && source  ~/.bashrc
