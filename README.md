@@ -154,20 +154,62 @@ mkdir $HOME/.kube/
 sudo cat /etc/rancher/k3s/k3s.yaml > $HOME/.kube/config
 ```
 
-### Installing from ArtifactHub
+### Installing Directly from ArtifactHub
 https://artifacthub.io/packages/helm/bitnami/wordpress
 
+#### Commands
 ```
-Direct Install
-
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-wordpress bitnami/wordpress -
 ```
 
+#### Output 
 ```
-Download locally
+Your WordPress site can be accessed through the following DNS name from within your cluster:
+
+    my-wordpress.default.svc.cluster.local (port 80)
+
+To access your WordPress site from outside the cluster follow the steps below:
+
+1. Get the WordPress URL by running these commands:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+        Watch the status with: 'kubectl get svc --namespace default -w my-wordpress'
+
+   export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+   echo "WordPress URL: http://$SERVICE_IP/"
+   echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+
+2. Open a browser and access WordPress using the obtained URL.
+
+3. Login with the following credentials below to see your blog:
+
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+
+WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
+  - resources
++info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+```
+
+### Check Status Load Balancer and get public IP
+```
+k get svc --namespace default -w my-wordpress
+```
+
+```
+export SERVICE_IP=$(k get svc --namespace default my-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+echo "WordPress URL: http://$SERVICE_IP/"
+echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+```
+
+### Download locally from ArtifactHub
+```
 helm pull oci://registry-1.docker.io/bitnamicharts/wordpress --version 25.0.0
 ```
+
+### Deploy Jenkins
+helm install my-jenkins jenkinsci/jenkins --version 5.8.66
 
 
 ### Aliases
