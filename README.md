@@ -160,7 +160,7 @@ https://artifacthub.io/packages/helm/bitnami/wordpress
 #### Commands
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install my-wordpress bitnami/wordpress -
+helm install my-wordpress bitnami/wordpress
 ```
 
 #### Output 
@@ -206,12 +206,21 @@ echo "WordPress Admin URL: http://$SERVICE_IP/admin"
 ### Download locally from ArtifactHub
 ```
 helm pull oci://registry-1.docker.io/bitnamicharts/wordpress --version 25.0.0
+helm install my-wordpress .
 ```
 
 ### Deploy Jenkins
+```
+helm repo add jenkins https://charts.jenkins.io
 helm install my-jenkins jenkinsci/jenkins --version 5.8.66
 helm show values jenkinsci/jenkins > jenkins/jenkins-values.yml
-k port-forward svc/my-jenkins --address 0.0.0.0 81:8080
+k port-forward svc/my-jenkins 81:8080
+```
+
+
+### Port Forward
+k port-forward svc/my-jenkins 81:8080
+
 
 ### Aliases
 ```
