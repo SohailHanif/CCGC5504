@@ -232,5 +232,26 @@ k port-forward svc/my-jenkins 81:8080
 ### Aliases
 ```
 echo "alias k='sudo k3s kubectl'" >> ~/.bashrc  && source  ~/.bashrc
-echo "alias helm='sudo helm'" >> ~/.bashrc  && source  ~/.bashrc
+```
+
+
+
+## Minimum Commands need to Run
+```
+echo "Installing Kubernetes"
+curl -sfL https://get.k3s.io | sh - 
+echo "alias k='sudo k3s kubectl'" >> ~/.bashrc  && source  ~/.bashrc
+
+echo "Installing Helm"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+echo "Installing Jenkins"
+helm repo add jenkins https://charts.jenkins.io
+helm install my-jenkins jenkins/jenkins --version 5.8.66
+k get secrets my-jenkins --output jsonpath="{.data.jenkins-admin-password}" | base64 --decode
+
+echo "Running Jenkins"
+k port-forward svc/my-jenkins 81:8080
 ```
