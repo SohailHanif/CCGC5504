@@ -212,8 +212,12 @@ helm install my-wordpress .
 ### Deploy Jenkins
 ```
 helm repo add jenkins https://charts.jenkins.io
+helm repo update
+mkdir jenkins
 helm install my-jenkins jenkins/jenkins --version 5.8.66
 helm show values jenkins/jenkins > jenkins/jenkins-values.yml
+k get secrets my-jenkins --output json > jenkins/secrets.json
+cat jenkins/secrets.json | grep password -A 1
 k port-forward svc/my-jenkins 81:8080
 ```
 
