@@ -210,7 +210,8 @@ helm pull oci://registry-1.docker.io/bitnamicharts/wordpress --version 25.0.0
 
 ### Deploy Jenkins
 helm install my-jenkins jenkinsci/jenkins --version 5.8.66
-
+helm show values jenkinsci/jenkins > jenkins/jenkins-values.yml
+k port-forward svc/my-jenkins --address 0.0.0.0 81:8080
 
 ### Aliases
 ```
