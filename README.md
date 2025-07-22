@@ -255,3 +255,11 @@ k get secrets my-jenkins --output jsonpath="{.data.jenkins-admin-password}" | ba
 echo "Running Jenkins"
 k port-forward svc/my-jenkins 81:8080
 ```
+
+## ArgoCD
+
+### Installation
+```
+k create namespace argocd
+k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
