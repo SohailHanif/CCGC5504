@@ -221,7 +221,7 @@ k get secrets my-jenkins --output json > jenkins/secrets.json
 k get secrets my-jenkins --output jsonpath="{.data.jenkins-admin-user}" | base64 --decode
 k get secrets my-jenkins --output jsonpath="{.data.jenkins-admin-password}" | base64 --decode
 
-k port-forward svc/my-jenkins 81:8080
+k port-forward --address 0.0.0.0 svc/my-jenkins 81:8080 
 ```
 
 
@@ -271,7 +271,13 @@ sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 ```
 
+### CLI Config
+```
+argocd login --core
+argocd admin initial-password -n argocd
+```
+
 ### Access
 ```
-k port-forward svc/argocd-server -n argocd 8080:443
+k port-forward  --address 0.0.0.0 svc/argocd-server -n argocd 8080:443
 ```
