@@ -261,7 +261,7 @@ k port-forward svc/my-jenkins 81:8080
 ### Installation Server
 ```
 k create namespace argocd
-k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+k apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 ### Installation CLI Command
@@ -274,13 +274,13 @@ rm argocd-linux-amd64
 ### CLI Config
 ```
 argocd login --core
-argocd admin initial-password -n argocd
+argocd admin initial-password
 ```
 
 ### Access Web UI
 ```
-k port-forward  --address 0.0.0.0 svc/argocd-server -n argocd 8080:443
+k port-forward  --address 0.0.0.0 svc/argocd-server 8080:443
 ```
 
 ### Create App CLI
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc
