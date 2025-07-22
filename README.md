@@ -277,7 +277,10 @@ argocd login --core
 argocd admin initial-password -n argocd
 ```
 
-### Access
+### Access Web UI
 ```
 k port-forward  --address 0.0.0.0 svc/argocd-server -n argocd 8080:443
 ```
+
+### Create App CLI
+argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default
