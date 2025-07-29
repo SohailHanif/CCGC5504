@@ -247,20 +247,28 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scr
 chmod 700 get_helm.sh
 ./get_helm.sh
 
+mkdir /home/ubuntu/.kube/
+touch /home/ubuntu/.kube/config
+sudo cp /etc/rancher/k3s/k3s.yaml /home/ubuntu/.kube/config
+
+k delete deployment traefik -n kube-system
+k delete svc traefik -n kube-system
+
 echo "Installing Jenkins"
 helm repo add jenkins https://charts.jenkins.io
 helm install my-jenkins jenkins/jenkins --version 5.8.66
 k get secrets my-jenkins --output jsonpath="{.data.jenkins-admin-password}" | base64 --decode
 
 echo "Running Jenkins"
-k port-forward svc/my-jenkins 81:8080
+echo "Wait 10 seconds before connecting to allow finish setup"
+sleep 30
+k port-forward --address 0.0.0.0 svc/my-jenkins 80:8080 
 ```
 
 ## ArgoCD
 
 ### Installation Server
 ```
-k create namespace argocd
 k apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
@@ -279,8 +287,21 @@ argocd admin initial-password
 
 ### Access Web UI
 ```
-k port-forward  --address 0.0.0.0 svc/argocd-server 8080:443
+k apply -f week_9/rbac.yml
+k port-forward  --address 0.0.0.0 svc/argocd-server 81:443
 ```
 
-### Create App CLI
+### ArgoCD App management using argocd CLI
+```
 argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc
+
+argocd app sync guestbook
+
+argocd app delete guestbook
+```
+
+### ArgoCD App management using kubernetes CLI
+```
+k apply -f week_9/guestbook.yml
+k delete -f week_9/guestbook.yml
+```
