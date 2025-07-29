@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apache
+spec:
+  project: default
+  source:
+    path: week_10/apache
+    repoURL: https://github.com/SohailHanif/CCGC5504.git
+    targetRevision: HEAD
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+        prune: true            # delete any resources removed from Git
+        selfHeal: true         # revert out‑of‑band changes
