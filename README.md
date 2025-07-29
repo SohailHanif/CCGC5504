@@ -287,21 +287,16 @@ argocd admin initial-password
 
 ### Access Web UI
 ```
-k apply -f week_9/rbac.yml
 k port-forward  --address 0.0.0.0 svc/argocd-server 81:443
-```
-
-### ArgoCD App management using argocd CLI
-```
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc
-
-argocd app sync guestbook
-
-argocd app delete guestbook
 ```
 
 ### ArgoCD App management using kubernetes CLI
 ```
+k apply -f week_9/rbac.yml
+
 k apply -f week_9/guestbook.yml
+
+# Access on http://AWS_IP:30082/
+
 k delete -f week_9/guestbook.yml
 ```
