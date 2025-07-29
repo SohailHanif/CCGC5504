@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/SohailHanif/CCGC5504.git
     targetRevision: HEAD
-    path: week_11/helm_apache
+    path: week_10/helm_apache
     helm: {} # optional: you can add valueFiles or values here
   destination:
     server: https://kubernetes.default.svc
