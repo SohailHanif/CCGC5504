@@ -304,8 +304,8 @@ k delete -f week_9/guestbook.yml
 ## Helm and ArgoCD
 ### Create apache app
 ```
-helm create apache_website
-k apply -f week_10/apache.yml
+k apply -f week_10/apache/application.yml
+k apply -f week_10/helm_apache/application.yml
 ```
 
 
