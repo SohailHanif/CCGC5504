@@ -1,0 +1,4 @@
+apiVersion: v2
+name: apache_website
+version: 0.1.0
+description: A minimal chart with Application, Deployment & Service

@@ -300,3 +300,18 @@ k apply -f week_9/guestbook.yml
 
 k delete -f week_9/guestbook.yml
 ```
+
+## Helm and ArgoCD
+### Create apache app
+```
+helm create apache_website
+k apply -f week_10/apache.yml
+```
+
+
+## Github Action (CI/CD)
+### Create apache app
+```
+k apply -f week_10/apache/application.yml
+```
+

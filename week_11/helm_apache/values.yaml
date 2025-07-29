@@ -1,0 +1,23 @@
+appName: &appName apache_website
+
+application:
+  name: *appName
+  repoURL: https://github.com/SohailHanif/CCGC5504.git
+  path: week_10/helm_argocd
+  namespace: default
+  targetRevision: HEAD
+
+deployment:
+  name: *appName-deploy
+  replicas: 1
+  image:
+    repository: httpd
+    tag: stable
+  containerPort: 80
+
+service:
+  name: *appName-svc
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30083
