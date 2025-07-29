@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    path: week_10/apache
+    path: week_11/apache
     repoURL: https://github.com/SohailHanif/CCGC5504.git
     targetRevision: HEAD
   destination:
