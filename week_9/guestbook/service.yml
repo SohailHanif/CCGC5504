@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: guestbook-ui
   labels:
-    app: guestbook
+    app: guestbook-ui
 spec:
   type: ClusterIP
   selector:
-    app: guestbook
+    app: guestbook-ui
   ports:
     - port: 80
       targetPort: 80
