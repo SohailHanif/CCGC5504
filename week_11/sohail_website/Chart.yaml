@@ -1,4 +1,4 @@
 apiVersion: v2
-name: apache_website
+name: sohail_website
 version: 0.1.0
 description: A minimal chart with Application, Deployment & Service
