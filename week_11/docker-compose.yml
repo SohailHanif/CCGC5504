@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  apache:
+    image: sohailhanif/sohail-website
+    container_name: sohail-website
+    ports:
+      - "83:80"

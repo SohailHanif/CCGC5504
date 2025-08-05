@@ -2,29 +2,25 @@
 
 This repo will contain code snippets and files for CCGC5504
 
-<br>
-
-# Commands
-
-## Git
-### First time using Git 
+# Git
+## First time using Git 
 ```
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
 
-### Creating new repo 
+## Creating new repo 
 ```
 git init
 git remote add origin GITHUB_REPO_URL
 ```
 
-### Using existing repo
+## Using existing repo
 ```
 git clone GITHUB_REPO_URL
 ```
 
-### When making changes (Most Used) 
+## When making changes (Most Used) 
 ```
 git add .
 git commit -m "commit message"
@@ -32,55 +28,59 @@ git push origin master
 git pull origin master
 ```
 
-### Adding new feature that want to seperate from main code until it is finished
+## Adding new feature that want to seperate from main code until it is finished
 ```
 git branch NEW_BRANCH_NAME
 git checkout NEW_BRANCH_NAME
 git push origin NEW_BRANCH_NAME
 ```
 
-### When feature done and ready to merge to main branch
+## When feature done and ready to merge to main branch
 ```
 git checkout master
 git merge NEW_BRANCH_NAME
 git push origin master
 ```
 
+# Public IP address
+```
+curl ipinfo.io/ip
+```
 
-## Docker
+# Docker
 
-### Installation
+## Installation
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh ./get-docker.sh
 ```
 
-### Run Container
+## Run Container
 ```
 sudo docker run hello-world
 ```
 
 
-### Get Compose Example
+## Get Compose Example
 ```
 git clone https://github.com/iimran-muhammad/multi-container-app
 ```
 
-### Compose
+## Compose
 ```
 sudo docker compose up
 sudo docker compose down
 ```
 
 
-## Kubernetes
+# Kubernetes
 
-### Installation
+## Installation
 ```
 curl -sfL https://get.k3s.io | sh - 
 ```
 
-### Get Components
+## Get Components
 ```
 sudo k3s kubectl get node
 sudo k3s kubectl get pods -A
@@ -89,40 +89,40 @@ sudo k3s kubectl get deployments -A
 sudo k3s kubectl get namespace --show-labels
 ```
 
-### Deploy App
+## Deploy App
 ```
 sudo k3s kubectl apply -f nginx.yml 
 sudo k3s kubectl get pods -n default
 sudo k3s kubectl get services -n default
 ```
 
-### Destroy/ Redeploy App
+## Destroy/ Redeploy App
 ```
 sudo k3s kubectl delete -f nginx.yml 
 ```
 
-### Debugging Failed resource
-#### Any resource
+## Debugging Failed resource
+## Any resource
 ```
 sudo k3s kubectl -n default describe pod basic-pods
 sudo k3s kubectl -n default describe pod basic-pods > debug.txt
 ```
 
-#### Pods only
+## Pods only
 ```
 sudo k3s kubectl -n default logs basic-pods
 ```
 
-## Helm
+# Helm
 
-### Installation
+## Installation
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-### Creating Charts/Applications
+## Creating Charts/Applications
 ```
 helm create website
 ```
@@ -147,23 +147,23 @@ helm create website
 5 directories, 10 files
 ```
 
-### Getting Kubernetes Context
+## Getting Kubernetes Context
 
 ```
 mkdir $HOME/.kube/
 sudo cat /etc/rancher/k3s/k3s.yaml > $HOME/.kube/config
 ```
 
-### Installing Directly from ArtifactHub
+## Installing Directly from ArtifactHub
 https://artifacthub.io/packages/helm/bitnami/wordpress
 
-#### Commands
+## Commands
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-wordpress bitnami/wordpress
 ```
 
-#### Output 
+## Output 
 ```
 Your WordPress site can be accessed through the following DNS name from within your cluster:
 
@@ -192,7 +192,7 @@ WARNING: There are "resources" sections in the chart not set. Using "resourcesPr
 +info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 ```
 
-### Check Status Load Balancer and get public IP
+## Check Status Load Balancer and get public IP
 ```
 k get svc --namespace default -w my-wordpress
 ```
@@ -203,13 +203,13 @@ echo "WordPress URL: http://$SERVICE_IP/"
 echo "WordPress Admin URL: http://$SERVICE_IP/admin"
 ```
 
-### Download locally from ArtifactHub
+## Download locally from ArtifactHub
 ```
 helm pull oci://registry-1.docker.io/bitnamicharts/wordpress --version 25.0.0
 helm install my-wordpress .
 ```
 
-### Deploy Jenkins
+## Deploy Jenkins
 ```
 helm repo add jenkins https://charts.jenkins.io
 helm install my-jenkins jenkins/jenkins --version 5.8.66
@@ -225,18 +225,18 @@ k port-forward --address 0.0.0.0 svc/my-jenkins 81:8080
 ```
 
 
-### Port Forward
+## Port Forward
 k port-forward svc/my-jenkins 81:8080
 
 
-### Aliases
+## Aliases
 ```
 echo "alias k='sudo k3s kubectl'" >> ~/.bashrc  && source  ~/.bashrc
 ```
 
 
 
-## Minimum Commands need to Run
+# Minimum Commands need to Run
 ```
 echo "Installing Kubernetes"
 curl -sfL https://get.k3s.io | sh - 
@@ -265,32 +265,32 @@ sleep 30
 k port-forward --address 0.0.0.0 svc/my-jenkins 80:8080 
 ```
 
-## ArgoCD
+# ArgoCD
 
-### Installation Server
+## Installation Server
 ```
 k apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-### Installation CLI Command
+## Installation CLI Command
 ```
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 ```
 
-### CLI Config
+## CLI Config
 ```
 argocd login --core
 argocd admin initial-password
 ```
 
-### Access Web UI
+## Access Web UI
 ```
 k port-forward  --address 0.0.0.0 svc/argocd-server 81:443
 ```
 
-### ArgoCD App management using kubernetes CLI
+## ArgoCD App management using kubernetes CLI
 ```
 k apply -f week_9/rbac.yml
 
@@ -301,17 +301,48 @@ k apply -f week_9/guestbook.yml
 k delete -f week_9/guestbook.yml
 ```
 
-## Helm and ArgoCD
-### Create apache app
+# Helm and ArgoCD
+## Create apache app
 ```
 k apply -f week_10/apache/application.yml
 k apply -f week_10/helm_apache/application.yml
 ```
 
 
-## Github Action (CI/CD)
-### Create apache app
+# Github Actions (CI/CD)
+## Create your website app with helm apache base
 ```
-k apply -f week_10/apache/application.yml
+k apply -f week_11/sohail_website/application.yml
 ```
 
+## Create Custom Docker Image and Push to DockerHub
+```
+sudo docker build -t [DOCKER_HUB_USERNAME]/[REPO_NAME] .
+  e.g. sudo docker build -t sohailhanif/sohail-website .
+
+sudo docker push [DOCKER_HUB_USERNAME]/[REPO_NAME]
+  e.g. sudo docker push sohailhanif/sohail-website
+```
+
+
+# Observability
+## Kubernetes Built-in
+```
+k get --raw /metrics
+k top pod
+k top node
+```
+
+## Prometheus/Grafana
+https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#configuration
+
+```
+helm install my-prometheus-grafana oci://ghcr.io/prometheus-commun
+ity/charts/kube-prometheus-stack
+
+k get pods -l "release=my-prometheus-grafana"
+
+k get secrets my-prometheus-grafana  -o jsonpath="{.data.admin-user}" | base64 -d ; echo
+
+k get secrets my-prometheus-grafana  -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+```

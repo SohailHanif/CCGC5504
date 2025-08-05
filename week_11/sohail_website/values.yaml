@@ -9,7 +9,7 @@ deployment:
   name: sohail-website-deploy
   replicas: 1
   image:
-    repository: httpd
+    repository: sohailhanif/sohail-website
     tag: latest
   containerPort: 80
 
