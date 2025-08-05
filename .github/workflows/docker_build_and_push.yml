@@ -14,10 +14,18 @@ jobs:
       DOCKERHUB_USERNAME: sohailhanif
       IMAGE_NAME: sohail-website
       IMAGE_TAG: ${{ github.run_number }}
+      DEPLOYMENT_FILE: path/to/your/deployment.yaml   # <--- update this
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Stop if last commit by github-actions
+      run: |
+        if [ "$(git log -1 --pretty='%an')" = "github-actions" ]; then
+          echo "Last commit was by GitHub Actions bot, stopping to prevent infinite loop."
+          exit 0
+        fi
 
     - name: Log in to Docker Hub
       run: docker login -u $DOCKERHUB_USERNAME --password ${{ secrets.DOCKERHUB_TOKEN }}
@@ -27,3 +35,15 @@ jobs:
 
     - name: Push Docker image
       run: docker push $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG
+
+    - name: Update image tag in deployment file
+      run: |
+        sed -i "s|\(image: $DOCKERHUB_USERNAME/$IMAGE_NAME:\).*|\1$IMAGE_TAG|" $DEPLOYMENT_FILE
+
+    - name: Commit and push deployment update
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add $DEPLOYMENT_FILE
+        git commit -m "chore: Update image tag to $IMAGE_TAG [ci skip]" || echo "No changes"
+        git push
