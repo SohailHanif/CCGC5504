@@ -5,4 +5,4 @@ FROM httpd:2.4
 RUN rm -rf /usr/local/apache2/htdocs/*
 
 # Copy your custom HTML folder to Apache's web directory
-COPY ~/CCGC5504/week_11/ /usr/local/apache2/htdocs/
+COPY week_11/html /usr/local/apache2/htdocs/
