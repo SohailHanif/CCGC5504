@@ -14,7 +14,7 @@ jobs:
       DOCKERHUB_USERNAME: sohailhanif
       IMAGE_NAME: sohail-website
       IMAGE_TAG: ${{ github.run_number }}
-      DEPLOYMENT_FILE: path/to/your/deployment.yaml   # <--- update this
+      DEPLOYMENT_FILE: week_11/sohail_website/values.yaml
 
     steps:
     - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
 
     - name: Update image tag in deployment file
       run: |
-        sed -i "s|\(image: $DOCKERHUB_USERNAME/$IMAGE_NAME:\).*|\1$IMAGE_TAG|" $DEPLOYMENT_FILE
+        sed -i 's/^\(\s*tag:\s*\).*/\1'"$IMAGE_TAG"'/' $DEPLOYMENT_FILE
 
     - name: Commit and push deployment update
       run: |
