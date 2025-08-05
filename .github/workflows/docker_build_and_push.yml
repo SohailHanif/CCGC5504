@@ -17,14 +17,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: test print
-      run: echo ${{ secrets.DOCKERHUB_TOKEN }} ; echo $DOCKERHUB_USERNAME
-
     - name: Log in to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: $DOCKERHUB_USERNAME
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      run: docker login -u $DOCKERHUB_USERNAME --password-stdin ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build Docker image
       run: docker build -t $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
