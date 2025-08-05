@@ -21,7 +21,7 @@ jobs:
       run: docker login -u $DOCKERHUB_USERNAME --password ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build Docker image
-      run: docker build -f week_11 -t $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
+      run: docker build -f week_11/Dockerfile -t $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG .
 
     - name: Push Docker image
       run: docker push $DOCKERHUB_USERNAME/$IMAGE_NAME:$IMAGE_TAG
