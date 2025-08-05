@@ -10,7 +10,7 @@ deployment:
   replicas: 1
   image:
     repository: sohailhanif/sohail-website
-    tag: 18
+    tag: 19
   containerPort: 80
 
 service:
