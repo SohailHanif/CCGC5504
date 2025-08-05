@@ -11,7 +11,7 @@ jobs:
     env:
       DOCKERHUB_USERNAME: sohailhanif
       IMAGE_NAME: sohail-website
-      IMAGE_TAG: $(date +%s)
+      IMAGE_TAG: latest
 
     steps:
     - name: Checkout code
