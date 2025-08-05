@@ -337,8 +337,7 @@ k top node
 https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#configuration
 
 ```
-helm install my-prometheus-grafana oci://ghcr.io/prometheus-commun
-ity/charts/kube-prometheus-stack
+helm install my-prometheus-grafana oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
 
 k get pods -l "release=my-prometheus-grafana"
 
