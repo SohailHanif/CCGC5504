@@ -344,4 +344,6 @@ k get pods -l "release=my-prometheus-grafana"
 k get secrets my-prometheus-grafana  -o jsonpath="{.data.admin-user}" | base64 -d ; echo
 
 k get secrets my-prometheus-grafana  -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+
+k port-forward --address 0.0.0.0 svc/my-prometheus-grafana 82:80
 ```
