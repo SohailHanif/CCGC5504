@@ -13,7 +13,7 @@ jobs:
     env:
       DOCKERHUB_USERNAME: sohailhanif
       IMAGE_NAME: sohail-website
-      IMAGE_TAG: latest
+      IMAGE_TAG: ${{ github.run_number }}
 
     steps:
     - name: Checkout code
